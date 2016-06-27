@@ -1,7 +1,8 @@
 package com.demo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 import demo.order.Order;
 import demo.order.OrderProcess;
@@ -13,7 +14,7 @@ import demo.order.OrderProcessImplService;
  */
 public class App 
 {
-    private static final Logger           LOGGER      = LoggerFactory.getLogger(App.class);
+    private static final Logger           LOGGER      = Logger.getLogger(App.class);
 
     public static void main( String[] args )
     {
@@ -26,7 +27,7 @@ public class App
         order.setPrice(100.00);
         order.setQty(20);
 //        String result = port.processOrder(order);
-        LOGGER.debug("port: {}", port);
-        LOGGER.debug("processOrder result: {}", port.processOrder(order));
+        LOGGER.debug("port: "+ port);
+        LOGGER.debug("processOrder result: "+ port.processOrder(order));
     }
 }
