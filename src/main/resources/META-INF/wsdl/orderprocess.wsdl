@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://order.demo/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="OrderProcessImplService" targetNamespace="http://order.demo/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://order.demo/" elementFormDefault="unqualified" targetNamespace="http://order.demo/" version="1.0">
+
+  <xs:element name="processOrder" type="tns:processOrder"/>
+
+  <xs:element name="processOrderResponse" type="tns:processOrderResponse"/>
+
+  <xs:complexType name="processOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:order"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="customerID" type="xs:string"/>
+      <xs:element minOccurs="0" name="itemID" type="xs:string"/>
+      <xs:element name="price" type="xs:double"/>
+      <xs:element name="qty" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="processOrderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="processOrderResponse">
+    <wsdl:part element="tns:processOrderResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="processOrder">
+    <wsdl:part element="tns:processOrder" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="OrderProcess">
+    <wsdl:operation name="processOrder">
+      <wsdl:input message="tns:processOrder" name="processOrder">
+    </wsdl:input>
+      <wsdl:output message="tns:processOrderResponse" name="processOrderResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderProcessImplServiceSoapBinding" type="tns:OrderProcess">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="processOrder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="processOrder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="processOrderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderProcessImplService">
+    <wsdl:port binding="tns:OrderProcessImplServiceSoapBinding" name="OrderProcessImplPort">
+      <soap:address location="http://localhost:9000/OrderProcess"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
