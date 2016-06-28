@@ -4,6 +4,8 @@ package com.demo;
 //import org.slf4j.LoggerFactory;
 import org.apache.log4j.Logger;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import demo.order.Order;
 import demo.order.OrderProcess;
 import demo.order.OrderProcessImplService;
@@ -18,8 +20,11 @@ public class App
 
     public static void main( String[] args )
     {
-        OrderProcessImplService orderProcess = new OrderProcessImplService();
-        OrderProcess port = orderProcess.getOrderProcessImplPort();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"cxf.xml"});
+        OrderProcess port = (OrderProcess)context.getBean("orderClient");
+
+//        OrderProcessImplService orderProcess = new OrderProcessImplService();
+//        OrderProcess port = orderProcess.getOrderProcessImplPort();
 
         Order order = new Order();
         order.setCustomerID("C001");
